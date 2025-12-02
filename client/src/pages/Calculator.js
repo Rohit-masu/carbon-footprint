@@ -6,9 +6,9 @@ import './assets/css/calculator.css';
 import Select from '@mui/material/Select';
 import { FormControl, InputLabel, MenuItem, Slider } from '@mui/material';
 
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_TRAVEL, ADD_HOME } from '../utils/mutations';
-import { QUERY_ME } from '../utils/queries';
+import { QUERY_ME, GET_AQI, GET_EMISSION_SUMMARY } from '../utils/queries';
 import { Box } from '@mui/system';
 import Auth from '../utils/auth';
 
@@ -61,6 +61,17 @@ const Calculator = () => {
 
   // navigate to new page
   const navigate = useNavigate();
+
+  // 🟢 Dynamic AQI and Emission Summary queries
+  const { data: aqiData } = useQuery(GET_AQI, {
+    variables: { city: 'Delhi' },
+  });
+
+  const { data: emissionSummary } = useQuery(GET_EMISSION_SUMMARY);
+
+  // destructure AQI safely
+  const aqiInfo = aqiData?.getAQI || {};
+  const summary = emissionSummary?.getEmissionSummary || {};
 
   // set useMutation to populate meQuery for both ADD_TRAVEL and ADD_HOME
   const [addTravel] = useMutation(ADD_TRAVEL, {
@@ -118,7 +129,6 @@ const Calculator = () => {
     let vehicleEmissions;
     switch (carType) {
       case 'Small':
-        // vehicleEmissions = Math.round(4.2887(carMiles));
         vehicleEmissions = Math.round(4.2887 * carMiles);
         break;
       case 'Average':
@@ -248,6 +258,39 @@ const Calculator = () => {
       {Auth.loggedIn() ? (
         <main className="calculator-main">
           <h1>Carbon Footprint Calculator</h1>
+
+          {/* AQI Summary Section */}
+          {aqiInfo.aqi && (
+            <div
+              className="aqi-card"
+              style={{
+                margin: '1rem auto',
+                padding: '1rem',
+                borderRadius: '12px',
+                backgroundColor:
+                  aqiInfo.aqi <= 1
+                    ? 'rgb(0,153,102)'
+                    : aqiInfo.aqi === 2
+                    ? 'rgb(255,222,51)'
+                    : aqiInfo.aqi === 3
+                    ? 'rgb(255,153,51)'
+                    : aqiInfo.aqi === 4
+                    ? 'rgb(255,51,51)'
+                    : 'rgb(153,51,255)',
+                color: '#fff',
+                width: 'fit-content',
+              }}
+            >
+              <h2>Air Quality - {aqiInfo.city}</h2>
+              <p>AQI: {aqiInfo.aqi}</p>
+              <p>{aqiInfo.description}</p>
+              <p>
+                PM2.5: {aqiInfo.pm2_5} μg/m³ | NO₂: {aqiInfo.no2} μg/m³ | CO:{' '}
+                {aqiInfo.co} μg/m³
+              </p>
+            </div>
+          )}
+
           <div className="text">
             <div className="description">
               <div className="calc-h3">
@@ -255,8 +298,7 @@ const Calculator = () => {
                 Find My Footprint.
               </div>
               <p>
-                Default values are the averages for an adult in the United
-                States. Enter values for your personal carbon footprint, not
+                Default values are the averages for an adult in the New Delhi. Enter values for your personal carbon footprint, not
                 your entire household.
               </p>
               <p>
@@ -295,7 +337,7 @@ const Calculator = () => {
                   </FormControl>
 
                   <Box sx={{ m: 1, width: 300 }}>
-                    <label className="slider">Car Miles Per Month</label>
+                    <label className="slider">Car km Per Month</label>
                     <Slider
                       sx={{
                         color: 'green',
@@ -321,7 +363,7 @@ const Calculator = () => {
                   </Box>
 
                   <Box sx={{ m: 1, width: 300 }}>
-                    <label>Bus Miles Per Month</label>
+                    <label>Bus Km Per Month</label>
                     <Slider
                       sx={{
                         color: '#2C82B3',
@@ -347,7 +389,7 @@ const Calculator = () => {
                   </Box>
 
                   <Box sx={{ m: 1, width: 300 }}>
-                    <label>Train Miles Per Month</label>
+                    <label>Train Km Per Month</label>
                     <Slider
                       sx={{
                         color: 'green',
@@ -373,7 +415,7 @@ const Calculator = () => {
                   </Box>
 
                   <Box sx={{ m: 1, width: 300 }}>
-                    <label>Plane Miles Per Month</label>
+                    <label>Plane Km Per Month</label>
                     <Slider
                       sx={{
                         color: '#2C82B3',
@@ -791,6 +833,19 @@ const Calculator = () => {
               </div>
             </form>
           </section>
+
+          {/* Emission Summary Section */}
+          {summary && (
+            <div className="summary-card">
+              <h2>🌍 Your Emission Summary</h2>
+              <p>Vehicle: {summary.vehicleEmissions} kg CO₂</p>
+              <p>Public Transit: {summary.publicTransitEmissions} kg CO₂</p>
+              <p>Plane: {summary.planeEmissions} kg CO₂</p>
+              <p>Home Electricity: {summary.electricityEmissions} kg CO₂</p>
+              <p>Water: {summary.waterEmissions} kg CO₂</p>
+              <p>Heat: {summary.heatEmissions} kg CO₂</p>
+            </div>
+          )}
         </main>
       ) : (
         <div className="not-logged-in">

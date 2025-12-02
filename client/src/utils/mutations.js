@@ -26,9 +26,9 @@ export const ADD_USER = gql`
 
 export const ADD_TRAVEL = gql`
   mutation addTravel(
-    $vehicleEmissions: Int!
-    $publicTransitEmissions: Int!
-    $planeEmissions: Int!
+     $vehicleEmissions: Float!
+    $publicTransitEmissions: Float!
+    $planeEmissions: Float!
   ) {
     addTravel(
       vehicleEmissions: $vehicleEmissions
@@ -50,9 +50,9 @@ export const ADD_TRAVEL = gql`
 
 export const ADD_HOME = gql`
   mutation addHome(
-    $waterEmissions: Int!
-    $electricityEmissions: Int!
-    $heatEmissions: Int!
+    $waterEmissions: Float!
+    $electricityEmissions: Float!
+    $heatEmissions: Float!
   ) {
     addHome(
       waterEmissions: $waterEmissions
@@ -73,25 +73,34 @@ export const ADD_HOME = gql`
 `;
 
 export const ADD_PLEDGE = gql`
-  mutation addPledge($pledgeData: [ID]) {
-    addPledge(pledgeData: $pledgeData) {
+  mutation addPledge($pledgeId: ID!) {
+    addPledge(pledgeId: $pledgeId) {
       _id
       username
       email
       pledgeData {
         _id
+        action
+        description
+        icon
+        link
       }
     }
   }
 `;
 
 export const REMOVE_PLEDGE = gql`
-  mutation removePledge($pledgeData: ID) {
-    removePledge(pledgeData: $pledgeData) {
+  mutation removePledge($pledgeId: ID!) {
+    removePledge(pledgeId: $pledgeId) {
+      _id
       username
       email
       pledgeData {
         _id
+        action
+        description
+        icon
+        link
       }
     }
   }

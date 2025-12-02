@@ -82,7 +82,7 @@ const MyPledges = () => {
   const handleDeletePledge = async (pledgeId) => {
     try {
       await removePledge({
-        variables: { pledgeData: pledgeId },
+        variables: { pledgeId },
       });
       // upon success remove pledgeId from localStorage
       removePledgeId(pledgeId);

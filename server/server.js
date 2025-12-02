@@ -1,3 +1,6 @@
+require('dotenv').config({ path: './server/.env' });
+console.log("AQI API Key:", process.env.AQI_API_KEY);
+
 const express = require('express');
 // import apollo server
 const { ApolloServer } = require('apollo-server-express');

@@ -4,49 +4,53 @@ import './assets/css/donation.css';
 const Donation = () => {
   const donations = [
     {
-      title: 'Clean Air Task Force',
+      title: 'Centre for Science and Environment (CSE)',
       description:
-        'The Clean Air Task Force (CATF) was founded in 1996 by Armond Cohen to enact federal policy that would force older coal plants in America to improve their emissions. Today, the charity is a global non-profit organization that works to safeguard against the worst impacts of climate change.',
-      link: 'https://www.catf.us/',
+        'CSE is a public interest research and advocacy organization based in New Delhi that works on sustainable development, air pollution, water management, and climate change awareness.',
+      link: 'https://www.cseindia.org/',
     },
     {
-      title: 'Cool Earth',
+      title: 'GiveIndia – Climate & Environment Fund',
       description:
-        'Cool Earth funds indigenous rainforest communities who tackle the root causes of deforestation and invest in projects that protect vital carbon sinks. Funds are used by local communities to run sustainability education programs, which have led to the development of solar energy farms, beekeeping projects, and sustainable waste solutions.',
-      link: 'https://www.coolearth.org/',
+        'GiveIndia supports multiple NGOs working on reforestation, clean energy, and environmental conservation across India. Donations help communities adapt to climate change.',
+      link: 'https://www.giveindia.org/fundraisers/climate-and-environment',
     },
     {
-      title: 'Carbon180',
+      title: 'Sankalptaru Foundation',
       description:
-        'Carbon180 works to build a world that removes more carbon than it produces. Their Carbon Economy Consortium brings together leading experts from all over the world to develop new pathways towards carbon removal solutions, and works closely with farmers to accelerate the adoption of agricultural practices that store carbon to help tackle climate change.',
-      link: 'https://carbon180.org/',
+        'Sankalptaru is an Indian NGO that plants trees across the country. You can donate to plant trees in your name, track their growth, and help offset carbon emissions.',
+      link: 'https://sankalptaru.org/',
+    },
+    {
+      title: 'Isha Foundation – Cauvery Calling',
+      description:
+        'An initiative by Sadhguru’s Isha Foundation to revitalize rivers through tree-based agriculture and sustainable water management.',
+      link: 'https://www.ishaoutreach.org/en/cauvery-calling',
     },
   ];
+
   const resources = [
     {
-      link: 'http://www.globalstewards.org/reduce-carbon-footprint.htm',
-      title: 'Reduce Carbon Footprint',
+      link: 'https://www.indiawaterportal.org/',
+      title: 'India Water Portal',
     },
     {
-      link: 'https://www.epa.gov/climateleadership/ghg-reduction-programs-strategies',
-      title: 'EPA Strategies',
+      link: 'https://www.cseindia.org/',
+      title: 'CSE Climate Resources',
     },
     {
-      link: 'https://www.nps.gov/pore/learn/nature/climatechange_action_home.htm',
-      title: 'Climate Change Action',
-    },
-    {
-      link: 'https://ourworldindata.org/co2-and-other-greenhouse-gas-emissions',
-      title: 'Our World In Data',
+      link: 'https://carbonfootprintindia.org/',
+      title: 'Carbon Footprint India – Measurement & Awareness',
     },
   ];
+
   return (
     <main className="donation-main">
       <div>
         <h1 className="donation-title">
           Looking for more ways to help the environment?
         </h1>
-        <h2 className="donate">Donate to fight climate change</h2>
+        <h2 className="donate">Support India’s fight against climate change</h2>
         <div className="donation">
           {donations.map(({ title, link, description }) => (
             <div className="donation-card" key={title}>
@@ -60,9 +64,7 @@ const Donation = () => {
         </div>
       </div>
       <div>
-        <h2 className="resource">
-          Learn more about lowering your carbon footprint
-        </h2>
+        <h2 className="resource">Learn more about sustainability in India</h2>
         <div className="resources">
           {resources.map(({ link, title }) => (
             <a key={title} href={link} target="_blank" rel="noreferrer">

@@ -44,7 +44,7 @@ const Pledges = () => {
     try {
       await addPledge({
         // save to array
-        variables: { pledgeData: pledgeId },
+        variables: {  pledgeId },
       });
 
       // save ids to local storage to change text on button
