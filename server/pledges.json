@@ -1,0 +1,92 @@
+[
+  {
+    "action": "Use Public Transport Twice a Week",
+    "description": "Delhi’s vehicles contribute nearly 40% of air pollution. Switching to metro or buses twice a week can cut your carbon footprint drastically.",
+    "icon": "mdi:bus",
+    "link": "https://www.delhimetrorail.com/"
+  },
+  {
+    "action": "Avoid Open Burning of Waste",
+    "description": "Burning garbage releases toxic PM2.5 and CO gases. Dispose waste properly or compost organic matter at home.",
+    "icon": "mdi:fire-off",
+    "link": "https://www.cpcb.nic.in/"
+  },
+  {
+    "action": "Carpool or Share Rides",
+    "description": "Carpooling reduces traffic and pollution while saving fuel. Share rides with friends or colleagues during peak hours.",
+    "icon": "mdi:car-multiple",
+    "link": "https://www.uber.com/in/en/drive/pooling/"
+  },
+  {
+    "action": "Plant Native Trees",
+    "description": "Native trees like Neem, Arjun, and Peepal absorb more carbon dioxide and improve Delhi’s air quality.",
+    "icon": "mdi:tree",
+    "link": "https://www.delhitreerescue.org/"
+  },
+  {
+    "action": "Use Air Purifying Indoor Plants",
+    "description": "Plants like Areca Palm, Snake Plant, and Money Plant naturally filter air indoors and reduce PM2.5 levels.",
+    "icon": "mdi:flower",
+    "link": "https://www.epa.gov/indoor-air-quality-iaq/indoor-air-pollution-introduction"
+  },
+  {
+    "action": "Reduce Generator Usage",
+    "description": "Generators release harmful nitrogen oxides and particulate matter. Use inverter batteries or solar power as alternatives.",
+    "icon": "mdi:engine-off-outline",
+    "link": "https://mnre.gov.in/"
+  },
+  {
+    "action": "Avoid Idling Vehicles",
+    "description": "Switch off your engine at red lights. Idling for 10 minutes wastes fuel and emits as much pollution as 10 km of driving.",
+    "icon": "mdi:car-off",
+    "link": "https://www.transport.delhi.gov.in/"
+  },
+  {
+    "action": "Segregate and Compost Wet Waste",
+    "description": "Composting kitchen waste reduces landfill methane emissions and produces natural fertilizer for plants.",
+    "icon": "mdi:recycle",
+    "link": "https://swachhbharatmission.ddws.gov.in/"
+  },
+  {
+    "action": "Use Reusable Bags and Bottles",
+    "description": "Plastic bags and bottles clog drains and release microplastics. Carry cloth bags and metal bottles instead.",
+    "icon": "mdi:bag-personal-outline",
+    "link": "https://www.unep.org/beat-plastic-pollution"
+  },
+  {
+    "action": "Switch to Clean Cooking Gas or Electric Stove",
+    "description": "Using LPG or induction reduces smoke and black carbon emissions from traditional stoves.",
+    "icon": "mdi:stove",
+    "link": "https://www.pmujjwalayojana.com/"
+  },
+  {
+    "action": "Install Rooftop Solar Panels",
+    "description": "Solar energy reduces dependency on coal-based electricity, one of Delhi’s major pollution sources.",
+    "icon": "mdi:solar-panel",
+    "link": "https://www.tatapowersolar.com/"
+  },
+  {
+    "action": "Use Energy-Efficient Appliances",
+    "description": "Appliances with a 5-star BEE rating consume less power and reduce emissions from coal-based power plants.",
+    "icon": "mdi:flash",
+    "link": "https://beeindia.gov.in/"
+  },
+  {
+    "action": "Reduce Air Conditioner Usage",
+    "description": "Use ceiling fans or coolers when possible. ACs emit greenhouse gases and increase electricity demand during peak hours.",
+    "icon": "mdi:air-conditioner",
+    "link": "https://www.energy.gov/energysaver/air-conditioning"
+  },
+  {
+    "action": "Avoid Crackers and Fireworks",
+    "description": "One Diwali night can spike Delhi’s AQI by 300–400 points. Choose eco-friendly celebrations instead.",
+    "icon": "mdi:emoticon-angry-outline",
+    "link": "https://www.epa.gov/air-quality"
+  },
+  {
+    "action": "Support Local Farmers' Markets",
+    "description": "Buying local reduces transportation emissions and supports sustainable agriculture in NCR.",
+    "icon": "mdi:cart-heart",
+    "link": "https://vikaspedia.in/agriculture"
+  }
+]

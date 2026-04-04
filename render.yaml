@@ -1,0 +1,22 @@
+# ─── Render Deployment Config ────────────────────────────────────────────────
+# Place this file at the root of your repo.
+# Render auto-detects it and sets up services.
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: carbon-footprint-backend
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false          # set manually in Render dashboard
+      - key: JWT_SECRET
+        sync: false          # set manually in Render dashboard
+      - key: AQI_API_KEY
+        sync: false          # set manually in Render dashboard
+    healthCheckPath: /graphql
