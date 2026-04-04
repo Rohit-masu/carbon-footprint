@@ -1,5 +1,5 @@
 require('dotenv').config({ path: './server/.env' });
-console.log("AQI API Key:", process.env.AQI_API_KEY);
+// console.log("AQI API Key:", process.env.AQI_API_KEY);
 
 const express = require('express');
 const cors = require('cors');
