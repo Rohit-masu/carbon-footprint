@@ -18,6 +18,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
+  persistedQueries: false, // This fixes the unbounded cache warning
 });
 
 const app = express();
