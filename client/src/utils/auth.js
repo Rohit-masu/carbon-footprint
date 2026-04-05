@@ -42,4 +42,6 @@ class AuthService {
   }
 }
 
-export default new AuthService();
+// ✅ Fix - replace with these 2 lines
+const authService = new AuthService();
+export default authService;
