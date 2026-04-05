@@ -13,7 +13,7 @@ const Home = () => {
 
   const fetchAQI = async () => {
     try {
-      const response = await fetch('/graphql', {
+      const response = await fetch(process.env.REACT_APP_GRAPHQL_URI ||'/graphql', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
