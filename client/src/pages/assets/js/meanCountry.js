@@ -54,7 +54,7 @@ const MeanCountry = () => {
         // ✅ Added source=75 for environmental data
         const url = `https://api.worldbank.org/v2/country/${codes}/indicator/EN.ATM.CO2E.PC?format=json&source=75&mrv=1&per_page=100`;
 
-        console.log('Fetching Per Capita URL:', url);
+        // console.log('Fetching Per Capita URL:', url);
         const res = await fetch(url);
 
         if (!res.ok) {
@@ -62,7 +62,7 @@ const MeanCountry = () => {
         }
 
         const json = await res.json();
-        console.log('Per Capita API Response:', json);
+        // console.log('Per Capita API Response:', json);
 
         // Check for API errors
         if (json[0] && json[0].message) {
