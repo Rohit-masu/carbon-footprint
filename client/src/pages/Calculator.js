@@ -165,7 +165,7 @@ const Calculator = () => {
     '& .MuiSlider-rail': { padding: '5px' },
   });
 
-  const aqiColor = [,'#009966','#ffde33','#ff9933','#cc0033','#660099'];
+  const aqiColor = [null,'#009966','#ffde33','#ff9933','#cc0033','#660099'];
 
   return (
     <div>
