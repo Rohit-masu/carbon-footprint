@@ -1,31 +1,19 @@
-require('dotenv').config({ path: './server/.env' });
-console.log("AQI API Key:", process.env.AQI_API_KEY);
+require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-// import apollo server
 const { ApolloServer } = require('apollo-server-express');
 const { authMiddleware } = require('./utils/auth');
 const path = require('path');
-
-// import our typeDefs and resolvers
 const { typeDefs, resolvers } = require('./schema');
 const db = require('./config/connection');
-
-const PORT = process.env.PORT || 3001;
-// create a new Apollo server and pass in our schema
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: authMiddleware,
-});
 
 const app = express();
 
 app.use(cors({
   origin: [
     process.env.CLIENT_ORIGIN || 'http://localhost:3000',
-    /\.vercel\.app$/,  // allow any Vercel preview URLs
+    /\.vercel\.app$/,
   ],
   credentials: true,
 }));
@@ -33,30 +21,42 @@ app.use(cors({
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// create a new instance of an Apollo server with GraphQL schema
-const startApolloServer = async (typeDefs, resolvers) => {
-  await server.start();
-  // integrate our apollo server with the Exress application as middleware
-  server.applyMiddleware({ app });
+// ✅ Module-level promise — reused across Vercel invocations
+let serverStarted = false;
 
-  // serve up static assets
-  if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
-  }
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-  });
-
-  db.once('open', () => {
-    app.listen(PORT, () => {
-      console.log(`API server running on port ${PORT}!`);
-      // log where we can go to test our GQL API
-      console.log(
-        `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
-      );
+const getApp = async () => {
+  if (!serverStarted) {
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: authMiddleware,
     });
-  });
+
+    await server.start();
+    server.applyMiddleware({ app });
+    serverStarted = true;
+
+    // Wait for DB to connect once
+    await new Promise((resolve) => {
+      if (db.readyState === 1) return resolve();
+      db.once('open', resolve);
+    });
+  }
+  return app;
 };
 
-// call the async function to start the server
-startApolloServer(typeDefs, resolvers);
+// ✅ Local dev: start normally
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3001;
+  getApp().then(() => {
+    app.listen(PORT, () => {
+      console.log(`API server running on port ${PORT}!`);
+    });
+  });
+}
+
+// ✅ Vercel: export handler
+module.exports = async (req, res) => {
+  const app = await getApp();
+  app(req, res);
+};
