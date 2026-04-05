@@ -21,7 +21,6 @@ app.use(cors({
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// ✅ Module-level promise — reused across Vercel invocations
 let serverStarted = false;
 
 const getApp = async () => {
@@ -31,12 +30,10 @@ const getApp = async () => {
       resolvers,
       context: authMiddleware,
     });
-
     await server.start();
     server.applyMiddleware({ app });
     serverStarted = true;
 
-    // Wait for DB to connect once
     await new Promise((resolve) => {
       if (db.readyState === 1) return resolve();
       db.once('open', resolve);
@@ -45,18 +42,16 @@ const getApp = async () => {
   return app;
 };
 
-// ✅ Local dev: start normally
-if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 3001;
-  getApp().then(() => {
-    app.listen(PORT, () => {
-      console.log(`API server running on port ${PORT}!`);
-    });
+// ✅ Render + local dev — hamesha listen karo
+const PORT = process.env.PORT || 3001;
+getApp().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}!`);
   });
-}
+});
 
-// ✅ Vercel: export handler
+// ✅ Vercel export
 module.exports = async (req, res) => {
-  const app = await getApp();
-  app(req, res);
+  const appInstance = await getApp();
+  appInstance(req, res);
 };
