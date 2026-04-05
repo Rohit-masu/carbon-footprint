@@ -12,7 +12,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 // Low  = 1-2 member household, minimal AC, shared transport
 // Med  = 3-4 member urban household, 1 car, AC
 // High = 4-5 member affluent urban, multiple cars, heavy AC, frequent flights
-const LABELS = ['Low-Income Household\n(<₹3L/yr)', 'Middle-Class Household\n(₹3–15L/yr)', 'High-Income Household\n(>₹15L/yr)'];
+// const LABELS = ['Low-Income Household\n(<₹3L/yr)', 'Middle-Class Household\n(₹3–15L/yr)', 'High-Income Household\n(>₹15L/yr)'];
 const VALUES = [1.2, 4.8, 14.5]; // metric tons CO₂/year
 
 const data = {
