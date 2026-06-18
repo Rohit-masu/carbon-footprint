@@ -105,7 +105,7 @@ Whether you're concerned about your carbon footprint or looking to make a tangib
    MONGODB_URI=your_mongodb_connection_string
    JWT_SECRET=your_secret_key
    PORT=3001
-   REACT_APP_API_URL=http://localhost:3001
+   AQI_API_KEY='<Your_OpenWeather_API_KEY>'
    ```
 
 4. **Run the application**
